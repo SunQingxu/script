@@ -1,0 +1,35 @@
+```
+处理逗号分隔的CSV文件的数据
+```
+import glob
+import pandas as pd
+
+# 获取所有CSV文件的文件路径列表
+file_list = glob.glob('/ifshk9/BC_COM_T2/Analysis/F23A430000268_FEEvtheX/*/result/combine/result_variation/*/combine.snp.annot.csv')
+
+# 循环遍历每个文件路径并读取CSV文件
+for file_path in file_list:
+    df = pd.read_csv(file_path,na_values='')
+    # 提取所需的列并保存到新文件中
+    selected_columns = df[['Func','Gene','Exonic|Biotype','Transcript','Codon_Change','Impact','COSMIC','1000G_ALL','1000G_EAS','dbSNPv151_GRCh38','SIFT','PolyPhen2','MutationAssessor','MetaSVM','LOF|NMD','Chr','Start','End','Ref','Obs','Otherinfo','isoform','ENCODE','HGMD','Clinvar','GWAS','1000G_SAS','1000G_AMR','1000G_EUR','ESP6500_ALL','ESP6500_AA','ESP6500_EA','PVFD','LRT','MutationTaster','FATHMM','MetaLR','VEST3','CADD','GERP++_NR','GERP++_RS','phyloP20way_mammalian','phyloP100way_vertebrate','phastCons20way_mammalian','phastCons100way_vertebrate','SiPhy_29way_logOdds']]
+   #selected_columns = df[['Gene','Start']]
+    #new_file_name = file_path.replace('.csv', '_new.csv')
+    new_file_name = file_path.replace('.csv', '_new.txt')
+    #new_file_name = file_path.replace('.csv', '_new.xls')
+    selected_columns.to_csv(new_file_name,sep='\t',index=False)
+    #selected_columns.to_excel(new_file_name, index=False)
+
+# 获取所有CSV文件的文件路径列表
+file_list = glob.glob('/ifshk9/BC_COM_T2/Analysis/F23A430000268_FEEvtheX/*/result/combine/result_variation/*/combine.indel.annot.csv')
+
+# 循环遍历每个文件路径并读取CSV文件
+for file_path in file_list:
+    df = pd.read_csv(file_path,na_values='')
+    # 提取所需的列并保存到新文件中
+    selected_columns = df.iloc[:, [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]]
+     #new_file_name = file_path.replace('.csv', '_new.csv')
+    new_file_name = file_path.replace('.csv', '_new.txt')
+    #new_file_name = file_path.replace('.csv', '_new.xls')
+    selected_columns.to_csv(new_file_name,sep='\t',index=False)
+    #selected_columns.to_excel(new_file_name, index=False)
+
